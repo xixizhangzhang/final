@@ -8,9 +8,9 @@ require_once 'includes/login.php';
 require_once 'includes/function.php';
 
 if (isset($_POST['submit'])) { //check if the form has been submitted
-	if ((empty($_POST['project_name'])) || (empty($_POST['filename'])) || (empty($_POST['project_link'])) || (empty($_POST['project_description'])) || (empty($_POST['category_id']))) {
-		$message = '<p class="error">Please fill out all of the form fields!</p>';
-	} else {
+	// if ((empty($_POST['project_name'])) || (empty($_POST['filename'])) || (empty($_POST['project_link'])) || (empty($_POST['project_description'])) || (empty($_POST['category_id']))) {
+	// 	$message = '<p class="error">Please fill out all of the form fields!</p>';
+	// } else {
 		$conn = new mysqli($hn, $un, $pw, $db);
 		if ($conn->connect_error) die($conn->connect_error);
 		$name = sanitizeMySQL($conn, $_POST['project_name']);
