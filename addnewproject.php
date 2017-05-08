@@ -1,20 +1,18 @@
 <?php
 session_start();
 
-print_r($_SESSION);
-
 require_once 'includes/auth.php';
 require_once 'includes/login.php';
 require_once 'includes/function.php';
 
 if (isset($_POST['submit'])) { //check if the form has been submitted
-	// if ((empty($_POST['project_name'])) || (empty($_POST['filename'])) || (empty($_POST['project_link'])) || (empty($_POST['project_description'])) || (empty($_POST['category_id']))) {
-	// 	$message = '<p class="error">Please fill out all of the form fields!</p>';
-	// } else {
+	if ((empty($_POST['project_name'])) || (empty($_FILES["filename"]["name"])) || (empty($_POST['project_link'])) || (empty($_POST['project_description'])) || (empty($_POST['category_id']))) {
+		$message = '<p class="error">Please fill out all of the form fields!</p>';
+	} else {
 		$conn = new mysqli($hn, $un, $pw, $db);
 		if ($conn->connect_error) die($conn->connect_error);
 		$name = sanitizeMySQL($conn, $_POST['project_name']);
-		$image = sanitizeMySQL($conn, $_POST['filename']);
+		$image = sanitizeMySQL($conn, $_FILES['filename']["name"]);
 		$link = sanitizeMySQL($conn, $_POST['project_link']);
 		$description = sanitizeMySQL($conn, $_POST['project_description']);
 		$category_id = sanitizeMySQL($conn, $_POST['category_id']);
@@ -40,7 +38,7 @@ if (isset($_POST['submit'])) { //check if the form has been submitted
 		} else {
 			$message = "<p class=\"message\">Successfully added new project named $name! <a href=\"project.php\">Return to project list</a></p>";
 		}
-	// }
+	}
 }
 
 ?>
